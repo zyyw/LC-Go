@@ -46,7 +46,7 @@ func topKFrequent(nums []int, k int) []int {
 
 	// 2. 找出数字频率 top K
 	// initialize minHeap
-	minHeap := make(MinHeapNum, k)
+	minHeap := make(MinHeapNum, 0)
 	for num, freq := range m {
 		if len(minHeap) < k {
 			// initializing minHeap
@@ -70,9 +70,10 @@ func topKFrequent(nums []int, k int) []int {
 	}
 
 	// 3. return
-	ret := make([]int, len(minHeap))
-	for i := 0; i < len(minHeap); i++ {
-		ret[i] = minHeap[i].Num
+	ret := make([]int, 0)
+	for len(minHeap) > 0 {
+		item := heap.Pop(&minHeap).(NumItem)
+		ret = append(ret, item.Num) // 升序返回
 	}
 	return ret
 }
