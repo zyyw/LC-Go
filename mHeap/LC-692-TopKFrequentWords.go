@@ -1,4 +1,4 @@
-package heap
+package mHeap
 
 import "container/heap"
 

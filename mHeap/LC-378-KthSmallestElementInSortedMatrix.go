@@ -1,4 +1,4 @@
-package heap
+package mHeap
 
 import (
 	"container/heap"
@@ -47,7 +47,7 @@ func kthSmallest(matrix [][]int, k int) int {
 		visited[i] = make([]bool, n)
 	}
 
-	// 初始化 heap
+	// 初始化 mHeap
 	minHeap := make(MinHeapMatrix, 0)
 	minHeap = append(minHeap, MatrixItem{
 		X:   0,

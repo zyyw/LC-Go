@@ -1,32 +1,32 @@
-package heap
+package mHeap
 
 import "container/heap"
 
-type NumItem struct {
+type NumFreq struct {
 	Num, Freq int
 }
 
 // implement MinHeap
-type MinHeapNum []NumItem
+type MinHeapNumFreq []NumFreq
 
-func (h MinHeapNum) Len() int {
+func (h MinHeapNumFreq) Len() int {
 	return len(h)
 }
 
-func (h MinHeapNum) Less(i, j int) bool {
+func (h MinHeapNumFreq) Less(i, j int) bool {
 	return h[i].Freq < h[j].Freq
 }
 
-func (h MinHeapNum) Swap(i, j int) {
+func (h MinHeapNumFreq) Swap(i, j int) {
 	h[i], h[j] = h[j], h[i]
 }
 
-func (h *MinHeapNum) Push(x interface{}) {
-	item := x.(NumItem)
+func (h *MinHeapNumFreq) Push(x interface{}) {
+	item := x.(NumFreq)
 	*h = append(*h, item)
 }
 
-func (h *MinHeapNum) Pop() interface{} {
+func (h *MinHeapNumFreq) Pop() interface{} {
 	res := (*h)[len(*h)-1]
 	*h = (*h)[:len(*h)-1]
 	return res
@@ -46,11 +46,11 @@ func topKFrequent(nums []int, k int) []int {
 
 	// 2. 找出数字频率 top K
 	// initialize minHeap
-	minHeap := make(MinHeapNum, 0)
+	minHeap := make(MinHeapNumFreq, 0)
 	for num, freq := range m {
 		if len(minHeap) < k {
 			// initializing minHeap
-			minHeap = append(minHeap, NumItem{
+			minHeap = append(minHeap, NumFreq{
 				Num:  num,
 				Freq: freq,
 			})
@@ -61,7 +61,7 @@ func topKFrequent(nums []int, k int) []int {
 			// 与堆顶元素进行比较
 			if minHeap[0].Freq < freq {
 				heap.Pop(&minHeap)
-				heap.Push(&minHeap, NumItem{
+				heap.Push(&minHeap, NumFreq{
 					Num:  num,
 					Freq: freq,
 				})
@@ -72,7 +72,7 @@ func topKFrequent(nums []int, k int) []int {
 	// 3. return
 	ret := make([]int, 0)
 	for len(minHeap) > 0 {
-		item := heap.Pop(&minHeap).(NumItem)
+		item := heap.Pop(&minHeap).(NumFreq)
 		ret = append(ret, item.Num) // 升序返回
 	}
 	return ret
