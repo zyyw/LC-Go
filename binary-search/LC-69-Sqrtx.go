@@ -1,4 +1,4 @@
-package LC_Go
+package binary_search
 
 func mySqrt(x int) int {
 	ret := -1

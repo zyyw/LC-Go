@@ -1,4 +1,4 @@
-package LC_Go
+package dp
 
 func longestPalindrome(s string) string {
 	if len(s) < 2 {

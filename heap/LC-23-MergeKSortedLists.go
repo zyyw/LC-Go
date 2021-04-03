@@ -1,6 +1,9 @@
-package LC_Go
+package heap
 
-import "container/heap"
+import (
+	"LC-Go"
+	"container/heap"
+)
 
 /**
  * Definition for singly-linked list.
@@ -10,7 +13,7 @@ import "container/heap"
  * }
  */
 
-type MinHeap []*ListNode
+type MinHeap []*LC_Go.ListNode
 
 func (h MinHeap) Len() int {
 	return len(h)
@@ -25,7 +28,7 @@ func (h MinHeap) Less(i, j int) bool {
 }
 
 func (h *MinHeap) Push(x interface{}) {
-	node := x.(*ListNode)
+	node := x.(*LC_Go.ListNode)
 	*h = append(*h, node)
 }
 
@@ -35,8 +38,8 @@ func (h *MinHeap) Pop() interface{} {
 	return res
 }
 
-func mergeKLists(lists []*ListNode) *ListNode {
-	dummy := &ListNode{
+func mergeKLists(lists []*LC_Go.ListNode) *LC_Go.ListNode {
+	dummy := &LC_Go.ListNode{
 		Val:  0,
 		Next: nil,
 	}
@@ -53,7 +56,7 @@ func mergeKLists(lists []*ListNode) *ListNode {
 
 	// iterate minHeap
 	for len(minHeap) > 0 {
-		node := heap.Pop(&minHeap).(*ListNode)
+		node := heap.Pop(&minHeap).(*LC_Go.ListNode)
 		tail.Next = node
 		tail = tail.Next
 		// populating minHeap

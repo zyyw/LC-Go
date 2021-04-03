@@ -1,4 +1,4 @@
-package LC_Go
+package heap
 
 import (
 	"container/heap"

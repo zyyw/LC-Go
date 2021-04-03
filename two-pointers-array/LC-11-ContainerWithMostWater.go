@@ -1,4 +1,4 @@
-package LC_Go
+package two_pointers_array
 
 func maxArea(height []int) int {
 	if len(height) < 2 {

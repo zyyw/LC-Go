@@ -1,4 +1,4 @@
-package LC_Go
+package dp
 
 func maxSubArray(nums []int) int {
 	if len(nums) == 0 {

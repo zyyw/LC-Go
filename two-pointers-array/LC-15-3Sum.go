@@ -1,4 +1,4 @@
-package LC_Go
+package two_pointers_array
 
 import "sort"
 

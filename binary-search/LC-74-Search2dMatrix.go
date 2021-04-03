@@ -1,4 +1,4 @@
-package LC_Go
+package binary_search
 
 func searchMatrix(matrix [][]int, target int) bool {
 	m, n := len(matrix), len(matrix[0])
