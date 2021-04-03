@@ -57,3 +57,41 @@ func findKthLargest(nums []int, k int) int {
 	// 返回值
 	return minHeap[0]
 }
+
+//// 快排序思想
+func findKthLargest2(nums []int, k int) int {
+	if len(nums) < k {
+		return math.MaxInt32
+	}
+
+	start, end := 0, len(nums) - 1
+	for start <= end {
+		mi := partition(nums, start, end)
+		if mi == k - 1 {
+			return nums[mi]
+		} else if mi < k - 1 {
+			start = mi + 1
+		} else {
+			end = mi - 1
+		}
+	}
+	return math.MaxInt32
+}
+
+func partition(nums []int, start, end int) int {
+	pivot := nums[start]
+	mi := start
+	for i := start+1; i <= end; i++ {
+		if nums[i] > pivot {
+			mi++
+			// swap(nums, mi, i)
+			nums[mi], nums[i] = nums[i], nums[mi]
+		}
+	}
+	// swap(nums, start, mi)
+	nums[start], nums[mi] = nums[mi], nums[start]
+
+
+	// return
+	return mi
+}
