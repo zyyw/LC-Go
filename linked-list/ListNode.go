@@ -1,6 +1,6 @@
-package LC_Go
+package linked_list
 
 type ListNode struct {
-	Val int
+	Val  int
 	Next *ListNode
 }

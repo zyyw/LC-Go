@@ -1,7 +1,6 @@
 package mHeap
 
 import (
-	"LC-Go"
 	"container/heap"
 )
 
@@ -13,7 +12,12 @@ import (
  * }
  */
 
-type MinHeap []*LC_Go.ListNode
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+type MinHeap []*ListNode
 
 func (h MinHeap) Len() int {
 	return len(h)
@@ -28,7 +32,7 @@ func (h MinHeap) Less(i, j int) bool {
 }
 
 func (h *MinHeap) Push(x interface{}) {
-	node := x.(*LC_Go.ListNode)
+	node := x.(*ListNode)
 	*h = append(*h, node)
 }
 
@@ -38,12 +42,12 @@ func (h *MinHeap) Pop() interface{} {
 	return res
 }
 
-func mergeKLists(lists []*LC_Go.ListNode) *LC_Go.ListNode {
-	dummy := &LC_Go.ListNode{
+func mergeKLists(lists []*ListNode) *ListNode {
+	dummy := ListNode{
 		Val:  0,
 		Next: nil,
 	}
-	tail := dummy
+	tail := &dummy
 
 	// initialize minHeap
 	minHeap := make(MinHeap, 0)
@@ -56,7 +60,7 @@ func mergeKLists(lists []*LC_Go.ListNode) *LC_Go.ListNode {
 
 	// iterate minHeap
 	for len(minHeap) > 0 {
-		node := heap.Pop(&minHeap).(*LC_Go.ListNode)
+		node := heap.Pop(&minHeap).(*ListNode)
 		tail.Next = node
 		tail = tail.Next
 		// populating minHeap
