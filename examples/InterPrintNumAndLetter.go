@@ -17,9 +17,8 @@ func PrintNumAndLetter() {
 	letter, number := make(chan bool, 1), make(chan bool)
 	wg := sync.WaitGroup{}
 
-	wg.Add(2)
-
 	// goroutine 1 打印数字
+	wg.Add(1)
 	go func() {
 		val := 1
 		for i := 0; i <= 13; i++ {
@@ -48,9 +47,48 @@ func PrintNumAndLetter() {
 				number <- true
 			}
 		}
-		wg.Done()
 	}()
 
 	number <- true
 	wg.Wait()
+}
+
+// 不用 WaitGroup
+func PrintNumAndLetter2() {
+	letter, number := make(chan bool, 1), make(chan bool)
+	done := make(chan struct{})
+
+	// goroutine 1 打印数字
+	go func() {
+		val := 1
+		for i := 0; i < 13; i++ {
+			select {
+			case <-number:
+				fmt.Print(val)
+				val++
+				fmt.Print(val)
+				val++
+				letter <- true
+			}
+		}
+		done <- struct{}{}
+	}()
+
+	// goroutine 2 打印字母
+	go func() {
+		char := 'A'
+		for i := 0; i < 13; i++ {
+			select {
+			case <-letter:
+				fmt.Print(string(char))
+				char++
+				fmt.Print(string(char))
+				char++
+				number <- true
+			}
+		}
+	}()
+
+	number <- true
+	<-done
 }
