@@ -23,14 +23,14 @@ func maxDepth2(root *TreeNode) int {
 	queue := make([]*TreeNode, 0)
 	queue = append(queue, root)
 	level := 0
-	for len(queue) != 0 {
+	for len(queue) > 0 {
 		level++
 		size := len(queue)
 		for i := 0; i < size; i++ {
-			node := queue[0]  // queue.peek
-			queue = queue[1:] // queue.pop
+			node := queue[0]  // queue.peek()
+			queue = queue[1:] // queue.pop()
 			if node.Left != nil {
-				queue = append(queue, node.Left)
+				queue = append(queue, node.Left) // queue.push()
 			}
 			if node.Right != nil {
 				queue = append(queue, node.Right)
