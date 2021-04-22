@@ -1,6 +1,8 @@
 package arrays
 
-import "container/heap"
+import (
+	"container/heap"
+)
 
 /*
   problem statement:
@@ -59,14 +61,15 @@ func sortArray2(nums []int) []int {
 	for i := mi; i < len(nums); i++ {
 		right[i-mi] = nums[i]
 	}
-	sortArray2(left)
-	sortArray2(right)
-	nums = merge(nums, left, right)
-	return nums
+	sortedLeft := sortArray2(left)
+	sortedRight := sortArray2(right)
+	res := merge(sortedLeft, sortedRight)
+	return res
 }
 
-func merge(nums, left, right []int) []int {
+func merge(left, right []int) []int {
 	i, j := 0, 0
+	nums := make([]int, len(left)+len(right))
 	k := 0
 	for i < len(left) && j < len(right) {
 		if left[i] < right[j] {
