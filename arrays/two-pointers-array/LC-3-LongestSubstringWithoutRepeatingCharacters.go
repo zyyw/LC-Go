@@ -1,4 +1,4 @@
-package arrays
+package two_pointers_array
 
 func lengthOfLongestSubstring(s string) int {
 	if len(s) < 2 {
